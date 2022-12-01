@@ -23,6 +23,9 @@ public class CartService {
 
     @Cacheable
     public Optional<Cart> findById(Long id){
+        if(!cartRepository.findById(id).isPresent()){
+            throw new RuntimeException("The cart doesn't exist");
+        }
         return cartRepository.findById(id);
     }
 
@@ -30,10 +33,15 @@ public class CartService {
         if(cartRepository.findById(id).isPresent()){
             cartRepository.deleteAll();
         }
+        if(!cartRepository.findById(id).isPresent()){
+            throw new RuntimeException("The cart doesn't exist");
+        }
     }
 
     public Cart createCart(Cart cart){
+        if(cartRepository.existsById(cart.getId())){
+            throw new RuntimeException("Cart already exists");
+        }
         return cartRepository.save(cart);
-
     }
 }

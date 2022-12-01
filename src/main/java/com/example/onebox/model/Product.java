@@ -1,6 +1,7 @@
 package com.example.onebox.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @NotBlank
     private String description;
+    @NotBlank
     private BigDecimal amount;
 
     public Product(String description, BigDecimal amount) {

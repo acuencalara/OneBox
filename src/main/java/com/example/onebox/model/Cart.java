@@ -1,6 +1,7 @@
 package com.example.onebox.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ public class Cart {
     private Long id;
 
     @Column(name = "created_date")
+    @NotBlank
     private LocalDate creationdDate;
     @OneToMany
     private List<Product> product;
