@@ -1,6 +1,5 @@
 package com.example.onebox.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +19,7 @@ public class Cart {
 
     @Column(name = "created_date")
     private LocalDate creationdDate;
-    @OneToMany (mappedBy = "id")
-    @JoinColumn(name="id")
+    @OneToMany
     private List<Product> product;
 
     public Cart(LocalDate creationdDate, List<Product> product) {

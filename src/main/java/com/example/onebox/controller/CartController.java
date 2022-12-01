@@ -18,6 +18,7 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
     private final InitMasterData initMasterData;
 
     @GetMapping("/initData/")

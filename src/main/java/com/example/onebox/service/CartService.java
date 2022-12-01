@@ -6,6 +6,7 @@ import com.example.onebox.model.Product;
 import com.example.onebox.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class CartService {
     @Autowired
     private CartRepository cartRepository;
 
+    @Cacheable
     public Optional<Cart> findById(Long id){
         return cartRepository.findById(id);
     }
@@ -27,10 +29,7 @@ public class CartService {
         }
     }
 
-    public Cart createCart(CartDto cartDto){
-        Cart cart = new Cart();
-        cart.setCreationdDate(cartDto.getCreationdDate());
-
+    public Cart createCart(Cart cart){
         return cartRepository.save(cart);
 
     }
