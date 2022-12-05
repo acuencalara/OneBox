@@ -19,7 +19,6 @@ public class Cart {
     private Long id;
 
     @Column(name = "created_date")
-    @NotBlank
     private LocalDate creationdDate;
     @OneToMany
     private List<Product> product;

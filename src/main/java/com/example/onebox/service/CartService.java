@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class CartService {
     @Cacheable
     public Optional<Cart> findById(Long id){
         if(!cartRepository.findById(id).isPresent()){
+            log.warn("The cart doesn't exists");
             throw new RuntimeException("The cart doesn't exist");
         }
         return cartRepository.findById(id);
@@ -34,14 +36,20 @@ public class CartService {
             cartRepository.deleteAll();
         }
         if(!cartRepository.findById(id).isPresent()){
+            log.warn("The cart doesn't exists");
             throw new RuntimeException("The cart doesn't exist");
         }
     }
 
     public Cart createCart(Cart cart){
+
         if(cartRepository.existsById(cart.getId())){
+            log.warn("You are trying to create a cart that already exists");
             throw new RuntimeException("Cart already exists");
+
         }
+        log.warn("New cart created");
         return cartRepository.save(cart);
+
     }
 }
