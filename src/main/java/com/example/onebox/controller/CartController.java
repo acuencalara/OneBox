@@ -31,9 +31,8 @@ public class CartController {
 
     @GetMapping("/cart/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Cart> getCartById(@PathVariable Long id){
-        cartService.findById(id);
-        return ResponseEntity.ok().build();
+    public Optional<Cart> getCartById(@PathVariable Long id){
+        return cartService.findById(id);
     }
 
     @DeleteMapping("/cart/{id}")
