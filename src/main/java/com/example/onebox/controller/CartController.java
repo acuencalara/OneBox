@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -44,7 +45,8 @@ public class CartController {
 
     @PostMapping("/cart/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Cart createCart(@RequestBody Cart cart){
-        return cartService.createCart(cart);
+    public ResponseEntity<Cart> createCart(@RequestBody Cart cart){
+        cartService.createCart(cart);
+        return ResponseEntity.created(URI.create("/cart/"+cart.getId())).build();
     }
 }
