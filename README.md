@@ -31,3 +31,5 @@ The cart has conditions, lives in memory (no storage is required), is volatile a
   
   •	Caffeine library
 
+  •	OpenApi (Swagger)
+
